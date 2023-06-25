@@ -3,10 +3,6 @@ import styled from 'styled-components';
 export const StyledOptions = styled.div`
   display: flex;
   justify-content: space-evenly;
-  /* flex-direction: column; */
-  /* flex-wrap: wrap; */
-  /* align-content: center; */
-  /* align-items: center; */
 
   padding: 20px;
 

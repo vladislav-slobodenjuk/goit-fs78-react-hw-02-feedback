@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledSection = styled.section`
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* flex-wrap: wrap; */
-  /* align-content: center; */
-  /* align-items: flex-end; */
-
   padding: 20px;
   text-align: center;
 
