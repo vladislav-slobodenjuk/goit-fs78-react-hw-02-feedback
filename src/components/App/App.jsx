@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Section } from './Section/Section';
-import { Notification } from './Notification/Notification';
-import { Statistics } from './Statistics/Statistics';
-import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
-import '../index.css';
+import { Section } from '../Section/Section';
+import { Notification } from '../Notification/Notification';
+import { Statistics } from '../Statistics/Statistics';
+import { FeedbackOptions } from '../FeedbackOptions/FeedbackOptions';
+import { Container } from './App.styled';
+import '../../index.css';
 
 export class App extends Component {
   state = {
@@ -12,18 +13,14 @@ export class App extends Component {
     bad: 0,
   };
 
-  onClick = e => {
-    const option = e.target.textContent;
-
-    this.setState(prevState => {
-      return {
-        [option]: prevState[option] + 1,
-      };
-    });
+  handleClick = ({ target: { name: option } }) => {
+    // const option = e.target.name;
+    this.setState(prevState => ({ [option]: prevState[option] + 1 }));
   };
 
   countTotalFeedback = () => {
-    return this.state.good + this.state.neutral + this.state.bad;
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
   };
 
   countPositiveFeedbackPercentage = () => {
@@ -39,21 +36,11 @@ export class App extends Component {
     const percentage = this.countPositiveFeedbackPercentage();
 
     return (
-      <div
-        style={{
-          // height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 30,
-          color: '#010101',
-        }}
-      >
+      <Container>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={Object.keys(this.state)}
-            onLeaveFeedback={this.onClick}
+            onLeaveFeedback={this.handleClick}
           />
         </Section>
         <Section title="Statistics">
@@ -61,15 +48,15 @@ export class App extends Component {
             <Notification message="There is no feedback" />
           ) : (
             <Statistics
-              Good={good}
-              Neutral={neutral}
-              Bad={bad}
-              Total={totalFeedback}
-              PositivePercentage={`${percentage}%`}
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={totalFeedback}
+              percentage={percentage}
             />
           )}
         </Section>
-      </div>
+      </Container>
     );
   }
 }
